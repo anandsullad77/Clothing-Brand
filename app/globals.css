@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-cormorant: "Cormorant Garamond", Georgia, serif;
+  --font-inter: "Inter", system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-ivory text-charcoal font-sans;
+    font-feature-settings: "kern", "liga", "calt";
+  }
+
+  ::selection {
+    @apply bg-gold/30 text-charcoal;
+  }
+
+  /* Refined focus ring for keyboard users */
+  :focus-visible {
+    outline: 2px solid theme("colors.gold");
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+@layer components {
+  .container-editorial {
+    @apply mx-auto w-full max-w-editorial px-6 sm:px-8 lg:px-12;
+  }
+
+  .eyebrow {
+    @apply text-[11px] uppercase tracking-luxe text-olive font-medium;
+  }
+
+  .heading-serif {
+    @apply font-serif font-light leading-[1.04] tracking-[-0.01em] text-charcoal;
+  }
+
+  /* Underline-on-hover link used across nav + inline CTAs */
+  .link-underline {
+    @apply relative inline-block;
+  }
+  .link-underline::after {
+    content: "";
+    @apply absolute -bottom-1 left-0 h-px w-full origin-right scale-x-0 bg-current transition-transform duration-500 ease-silk;
+  }
+  .link-underline:hover::after {
+    @apply origin-left scale-x-100;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 bg-charcoal px-8 py-4 text-[12px] font-medium uppercase tracking-wide2 text-ivory transition-all duration-500 ease-silk hover:bg-charcoal-soft hover:tracking-[0.18em];
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 border border-charcoal/30 bg-transparent px-8 py-4 text-[12px] font-medium uppercase tracking-wide2 text-charcoal transition-all duration-500 ease-silk hover:border-charcoal hover:bg-charcoal hover:text-ivory;
+  }
+}
+
+@layer utilities {
+  /* Pause CSS marquee on hover */
+  .pause-on-hover:hover {
+    animation-play-state: paused;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Slim, elegant scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: theme("colors.ivory");
+}
+::-webkit-scrollbar-thumb {
+  background: theme("colors.beige-deep");
+  border: 2px solid theme("colors.ivory");
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: theme("colors.olive");
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
